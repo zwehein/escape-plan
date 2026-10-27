@@ -6,6 +6,8 @@ scores, and rematches; the browser renders server state.
 
 The hosted game server runs on AWS EC2 and is administered through AWS Systems Manager Session Manager.
 
+Players can join the live game here: [Play Escape Plan on EC2](http://13.239.136.254/).
+
 ## Development
 
 New here? [docs/TWO_COMPUTER_SETUP.md](docs/TWO_COMPUTER_SETUP.md) walks through running
