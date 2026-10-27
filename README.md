@@ -32,9 +32,6 @@ IP in `client/src/config.ts` (e.g. `http://192.168.1.23:3000`), then:
 Step-by-step instructions for macOS, Windows and Linux are in
 [docs/TWO_COMPUTER_SETUP.md](docs/TWO_COMPUTER_SETUP.md).
 
-To host the game publicly on AWS EC2, see
-[docs/AWS_EC2_DEPLOYMENT.md](docs/AWS_EC2_DEPLOYMENT.md).
-
 For client hot reload, run `npm run dev` and `npm run dev:client` in separate
 terminals, then open `http://localhost:5173`. Vite proxies Socket.IO to port
 3000. The server address is hard-coded in `client/src/config.ts`
