@@ -1,0 +1,27 @@
+[Unit]
+Description=Escape Plan multiplayer game server
+After=network.target
+
+[Service]
+Type=simple
+User=escapeplan
+Group=escapeplan
+WorkingDirectory=/opt/escape-plan
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=3000
+Environment=NO_OPEN=1
+EnvironmentFile=/etc/escape-plan.env
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=5
+KillSignal=SIGINT
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/opt/escape-plan
+
+[Install]
+WantedBy=multi-user.target

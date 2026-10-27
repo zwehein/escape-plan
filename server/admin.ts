@@ -8,6 +8,10 @@ import { registerAdminSocial } from './social.js';
 // Read the password from an environment variable; fall back to a default for local testing
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? 'admin123';
 
+if (process.env.NODE_ENV === 'production' && ADMIN_PASSWORD === 'admin123') {
+  throw new Error('Set a unique ADMIN_PASSWORD before starting in production.');
+}
+
 export function registerAdmin(io: GameServer): void {
   const admin = io.of('/admin');
 

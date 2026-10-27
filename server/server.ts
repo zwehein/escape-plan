@@ -18,6 +18,7 @@ import { getClip } from './voice.js';
 import { emoteSvg } from '../client/src/social/emoteArt.js';
 
 const PORT = Number(process.env.PORT) || 3000;
+const HOST = process.env.HOST || '0.0.0.0';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
@@ -27,13 +28,12 @@ const io: GameServer = new Server(httpServer, {
   cors: { origin: '*' },
 });
 
-// The server computer is for the admin page only; players run the game page
-// on their own computers (`npm run dev:client`) and connect via config.ts.
+// The built game is served by this process in production. In development,
+// players can still use the Vite dev server and its Socket.IO proxy.
 const ADMIN_PATH = '/admin.html';
 app.get(ADMIN_PATH, (_req, res) => res.sendFile(path.join(__dirname, '..', 'client', 'admin.html')));
-// The admin page reuses the game's pixel images
-app.use('/assets', express.static(path.join(__dirname, '..', 'client', 'dist', 'assets')));
-app.get('/', (_req, res) => res.redirect(ADMIN_PATH));
+const clientDist = path.join(__dirname, '..', 'client', 'dist');
+app.use(express.static(clientDist));
 
 // Emote pictures for the admin page's Watch view (same pixels as the game)
 app.get('/emotes/:id.svg', (req, res) => {
@@ -81,7 +81,7 @@ io.on('connection', (socket) => {
 });
 
 // Use httpServer.listen, not app.listen, so Socket.IO is included
-httpServer.listen(PORT, () => {
+httpServer.listen(PORT, HOST, () => {
   const adminUrl = `http://localhost:${PORT}${ADMIN_PATH}`;
   console.log(`Server running at http://localhost:${PORT}`);
   console.log(`Admin page: ${adminUrl}`);
