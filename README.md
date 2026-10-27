@@ -4,6 +4,8 @@ Classic Mode includes the pure game engine, Socket.IO server, and a React client
 with original block-style pixel assets. The server owns movement, turn deadlines,
 scores, and rematches; the browser renders server state.
 
+The hosted game server runs on AWS EC2 and is administered through AWS Systems Manager Session Manager.
+
 ## Development
 
 New here? [docs/TWO_COMPUTER_SETUP.md](docs/TWO_COMPUTER_SETUP.md) walks through running
